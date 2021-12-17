@@ -5,9 +5,9 @@ Description=uWSGI service
 
 ExecStartPre=/bin/mkdir -p /run/uwsgi
 
-ExecStartPre=/bin/chown root:nginx /run/uwsgi
+ExecStartPre=/bin/chown root:www-data /run/uwsgi
 
-ExecStart=/home/noel/cccw-server/venv/bin/uwsgi --emperor /etc/uwsgi/sites
+ExecStart=/opt/cccw-server/venv/bin/uwsgi --emperor /etc/uwsgi/sites
 Restart=always
 Type=notify
 NotifyAccess=all
