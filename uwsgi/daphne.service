@@ -6,7 +6,7 @@ User=root
 Group=root
 WorkingDirectory=/opt/cccw-server
 
-Environment="DJANGO_SETTINGS_MODULE=channels_test_project.settings"
+Environment="DJANGO_SETTINGS_MODULE=djangoProject.settings"
 ExecStart=/root/Env/24bot/bin/daphne --verbosity 0 --access-log /var/log/daphne/daphne.log djangoProject.asgi:application
 
 ExecReload=/bin/kill -s HUP $MAINPID
