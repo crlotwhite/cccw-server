@@ -5,7 +5,10 @@ from django.db import models
 class ChatRoomManager(models.Manager):
     # ref: https://stackoverflow.com/questions/9415616/adding-to-the-constructor-of-a-django-model
     def create_chatroom(self, name):
-        chat_room = self.create(name=name)
+        from util.issues_key import issues_key
+
+        key = issues_key(name)
+        chat_room = self.create(name=name, secrets=key)
         return chat_room
 
 
