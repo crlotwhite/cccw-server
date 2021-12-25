@@ -12,6 +12,8 @@
 	<link rel="icon" href="{% static 'images/chat.png' %}">
     <script src="{% static 'javascript/darkmode.js' %}"></script>
     <script src="{% static 'javascript/bubble.js' %}"></script>
+    <script src="{% static 'javascript/dateUtil.js' %}"></script>
+    <script src="{% static 'javascript/cookieBucket.js' %}"></script>
 </head>
 <body>
 	<div class="container p-3 shadow">
@@ -25,78 +27,61 @@
 		<div>
 			<h1><a href="/rooms">&#x2B05;</a>
 				<br>
-				Chat Room
+				{{ room_name }}
 			</h1>
 		</div>
 		<div>
 			<div class="chat-panel" id="chat-panel">
-				<div class="p-4 rounded mt-2
-							d-flex flex-column
-							row no-gutters ">
-					<div class="col-md-3">
-						<div class="chat-bubble chat-bubble--left cb-left">Hello World!		
-							<small class="d-block">12.00</small>
-						</div>
-					</div>
-				</div>
-				<div class="p-4 rounded mt-2
-							d-flex flex-column
-							row no-gutters">
-					<div class="col-md-3 offset-md-9">
-						<div class="chat-bubble chat-bubble--right cb-right">Hello World!
-							<small class="d-block">12.00</small>
-						</div>
-					</div>
-				</div>
-				<div class="p-4 rounded mt-2
-							d-flex flex-column
-							row no-gutters ">
-					<div class="col-md-3">
-						<div class="chat-bubble chat-bubble--left cb-left">Hello World!
-							<small class="d-block">12.15</small>
-						</div>
-					</div>
-				</div>
-				<div class="p-4 rounded mt-2
-							d-flex flex-column
-							row no-gutters ">
-					<div class="col-md-3">
-						<div class="chat-bubble chat-bubble--left cb-left">Hello World!		
-							<small class="d-block">12.00</small>
-						</div>
-					</div>
-				</div>
-				<div class="p-4 rounded mt-2
-							d-flex flex-column
-							row no-gutters">
-					<div class="col-md-3 offset-md-9">
-						<div class="chat-bubble chat-bubble--right cb-right">Hello World!
-							<small class="d-block">12.00</small>
-						</div>
-					</div>
-				</div>
-				<div class="p-4 rounded mt-2
-							d-flex flex-column
-							row no-gutters ">
-					<div class="col-md-3">
-						<div class="chat-bubble chat-bubble--left cb-left">Hello World!
-							<small class="d-block">12.15</small>
-						</div>
-					</div>
-				</div>
+
 			</div>
 			
 			<div class="row">  
 				<div class="col-md-12">
 					<div class="chat-box-tray">
 						<i class="material-icons"><a href="#">sentiment_very_satisfied</a></i>
-						<input type="text" placeholder="Enter message here..."/>
-						<i class="material-icons"><a href="#">send</a></i>
+						<input id="chat-message-input" maxlength="14" type="text" placeholder="Enter message here..."/>
+                        <button id="chat-message-submit"><i class="material-icons">send</i></button>
 					</div>
 				</div>
 			</div>
-            <button value="test" onclick="add_bubble()" />
 		</div>
 	</div>
+<script>
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + "{{ room_name }}"
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            console.log(data.message, data.date, data.name);
+            add_bubble(data.message, data.date, data.name, data.name === getCookie("username"));
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message,
+                'date': makeTimeString(),
+                'name': getCookie("username")
+            }));
+            messageInputDom.value = '';
+        };
+    </script>
 </body>
 </html>

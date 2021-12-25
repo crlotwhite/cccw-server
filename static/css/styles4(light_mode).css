@@ -98,7 +98,7 @@
 		
 		.chat-panel{
 			overflow-y: scroll;
-			max-height: 50vh;
+			height: 50vh;
 			background: white;
 			scrollbar-color: #8ec5fc #F5F5F5;
 		}
@@ -158,4 +158,12 @@
 		a:hover {
 			color: var(--SkyBlue);
 			cursor: pointer;
+		}
+
+		#chat-message-submit {
+			background-color: Transparent;
+			background-repeat:no-repeat;
+			border: none;
+			cursor:pointer;
+			overflow: hidden;
 		}
