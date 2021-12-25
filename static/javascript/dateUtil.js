@@ -5,9 +5,9 @@ function makeTimeString() {
     //             + currentDate.getFullYear() + " "
     //             + currentDate.getHours() + ":"
     //             + currentDate.getMinutes();
-
+    const min = currentDate.getMinutes();
     const dateTime = currentDate.getHours() + ":"
-                + currentDate.getMinutes();
+                + (min<10? "0" + min.toString() : min);
 
     return dateTime;
 }
