@@ -1,0 +1,80 @@
+		:root {
+			--white: #faf0e6;
+			--LightBlack: #141414;
+			--LightSteelBlue: #B6C2D9;
+			--SteelBlue: #4D7EA8;
+			--LightBlue: #0db8de;
+			--Celeste: #b9faf8;
+			--BabyBlue: #89daff;
+			--SkyBlue: #51e5ff;
+		}
+		html, body {
+			height: 100%;
+			background-color: white;
+		}
+		.global-container {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--SkyBlue);
+		}
+		img {
+			display: block;
+			margin: auto;
+			width: 80px;
+			height: 80px;
+			margin-top: 40px;
+		}
+		form {
+			padding-top: 10px;
+			font-size: 14px;
+			margin-top: 30px;
+		}
+		.login-form {
+			width: 300px;
+			height: 450px;
+			margin: 20px;
+			background: white;
+			border-radius: 10px;
+		}
+		input[type="text"] {
+			background: white;
+			border: 2px solid var(--SkyBlue);
+			border-radius: 10px;
+			margin-bottom: 25px;
+			padding: 0 10px 0 10px;
+			width: 250px;
+			height: 35px;
+			font-size: 18px;
+			font-family: "Georgia", sans-serif;
+		}
+		input[type="text"]:focus {
+			outline: none;
+			border: none;
+			background: var(--SkyBlue);
+			border: 2px solid white;
+			border-radius: 10px;
+			margin-bottom: 25px;
+		}
+		.card-title {
+			font-weight: 800;
+			padding-bottom: 30px;
+			font-family: "Franklin Gothic Medium", sans-serif;
+		}
+		a {
+			padding: 6px;
+			background: var(--SkyBlue);
+			font-size: 14px;
+			transform: translate(10px);
+			border-radius: 10px;
+			width: 250px;
+			height: 35px;
+			text-decoration: none;
+			color: black;
+			text-align: center;
+			font-family: "Georgia",san-serif;
+		}
+		a:hover {
+			color: white;
+		}
