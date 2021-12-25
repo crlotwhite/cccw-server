@@ -1,39 +1,49 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    {% load static %}
 	<meta name="viewport" content="width=device-width,initial scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link href="styles1.css" rel="stylesheet">
-	<script src="setting.js"> </script>
-	<link rel="icon" href="chat.png">
+	<link href="{% static 'css/styles1.css' %}" rel="stylesheet" id="main_css">
+	<link href="{% static 'css/toggle.css' %}" rel="stylesheet">
+	<link rel="icon" href="{% static 'images/chat.png' %}">
+    <script src="{% static 'javascript/darkmode.js' %}"></script>
 	<title>Secret Chat</title>
 	<script>
-
         function goRoomList() {
             let userName = document.getElementById("inputField").value;
             if (userName === "" || userName === " " || userName === "\t") {
                 alert("Username can't be empty");
             } else {
-                document.cookie = "username=" + userName;
+                let exdate = new Date();
+                exdate.setDate(exdate.getDate() + 1);
+                let cookieValue = escape(userName) + "; expires=" + exdate.toUTCString();
+
+                document.cookie = "username=" + cookieValue;
                 window.location = "/rooms";
             }
         }
-
     </script>
 </head>
 <body>
 	<div class="global-container">
+        <div style="position: fixed; top:4px;right:2px;">
+            <!-- Rounded switch -->
+            <label class="switch" style="margin-top:4px;">
+              <input id="switch" type="checkbox" checked onclick="darkmode('{% static "css/styles1.css" %}', '{% static "css/styles1(light_mode).css" %}');">
+              <span class="slider round"></span>
+            </label>
+        </div>
 		<div class="card login-form">
 			<div class="card-body shadow">
-				<img src="chat.png" alt="">
+				<img src="{% static 'images/chat.png' %}" alt="chat bubble">
 				<h1 class="card-title text-center" id="but">CHAT</h1>
 				<div class="card-text">
 					<form>
 						<div class= "text-center">
 							<input id="inputField" type="text" class="text-center" placeholder="Username">
 						</div>
-							<a id="LetChatBtn" type="button" href="#" onclick="goRoomList()">
-							Let's Chat</a>
+							<a id="LetChatBtn" type="button" onclick="goRoomList()" href="#">Let's Chat</a>
 					</form>
 				</div>
 			</div>

@@ -45,6 +45,7 @@
 			height: 35px;
 			font-size: 18px;
 			font-family: "Georgia", sans-serif;
+			color: white;
 		}
 		input[type="text"]:focus {
 			outline: none;
@@ -53,6 +54,7 @@
 			border: 2px solid var(--LightBlue);
 			border-radius: 10px;
 			margin-bottom: 25px;
+			color: black;
 		}
 		.card-title {
 			font-weight: 800;
