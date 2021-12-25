@@ -64,7 +64,6 @@
             let decipher = CryptoJS.AES.decrypt(data.message, "{{ secret }}");
             decipher = decipher.toString(CryptoJS.enc.Utf8);
 
-            console.log(data.message, decipher, data.date, data.name);
             add_bubble(decipher, data.date, data.name, data.name === getCookie("username"));
         };
 
